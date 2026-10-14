@@ -272,7 +272,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "cdc",
+						"fileName": "cdc.json",
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
@@ -480,13 +480,10 @@
 														"type": "DatasetReference",
 														"parameters": {
 															"folder": {
-																"value": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))",
-																"type": "Expression"
-															},
-															"file": {
 																"value": "@item().file",
 																"type": "Expression"
-															}
+															},
+															"file": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))"
 														}
 													},
 													"enableLogging": false,
@@ -515,7 +512,7 @@
 													"source": {
 														"type": "AzureSqlSource",
 														"sqlReaderQuery": {
-															"value": "SELECT  updated_at\nFROM dbo.@{item().file}",
+															"value": "SELECT  MAX(updated_at)\nFROM dbo.@{item().file}\n",
 															"type": "Expression"
 														},
 														"queryTimeout": "02:00:00",
