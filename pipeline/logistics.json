@@ -128,11 +128,12 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"cdc": {
-											"value": "@item().file",
+											"value": "@concat(item().file, '_cdc')",
 											"type": "Expression"
 										}
 									}
-								}
+								},
+								"firstRowOnly": false
 							}
 						},
 						{
