@@ -220,11 +220,6 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
-												"additionalColumns": [
-													{
-														"value": "$$COLUMN:"
-													}
-												],
 												"sqlReaderQuery": {
 													"value": "SELECT  MAX(updated_at)\nFROM dbo.@{item().file}\n",
 													"type": "Expression"
