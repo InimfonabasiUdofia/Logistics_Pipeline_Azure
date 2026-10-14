@@ -227,6 +227,12 @@
 										"typeProperties": {
 											"source": {
 												"type": "JsonSource",
+												"additionalColumns": [
+													{
+														"name": "cdc",
+														"value": "@activity('max_cdc').output.resultSets[0].rows[0].cdc"
+													}
+												],
 												"storeSettings": {
 													"type": "AzureBlobFSReadSettings",
 													"recursive": true,
@@ -250,7 +256,13 @@
 										"inputs": [
 											{
 												"referenceName": "Json4",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"cdcfolder": {
+														"value": "@{item().file}_cdc",
+														"type": "Expression"
+													}
+												}
 											}
 										],
 										"outputs": [
@@ -287,7 +299,7 @@
 												{
 													"type": "Query",
 													"text": {
-														"value": "SELECT  MAX(updated_at)\nFROM dbo.@{item().file}\n",
+														"value": "SELECT  MAX(updated_at) as cdc\nFROM dbo.@{item().file}\n",
 														"type": "Expression"
 													}
 												}
