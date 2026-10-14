@@ -1,0 +1,28 @@
+{
+	"name": "Json4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cdcfolder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "empty.json",
+				"folderPath": {
+					"value": "@dataset().cdcfolder",
+					"type": "Expression"
+				},
+				"fileSystem": "cdc"
+			}
+		},
+		"schema": {}
+	}
+}
