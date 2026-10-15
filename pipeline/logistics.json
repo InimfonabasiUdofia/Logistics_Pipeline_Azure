@@ -376,7 +376,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"connector": {
-														"value": "@item().file",
+														"value": "@toUpper(item().file)",
 														"type": "Expression"
 													}
 												}
