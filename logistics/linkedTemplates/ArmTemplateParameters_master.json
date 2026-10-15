@@ -11,6 +11,15 @@
 		"AzureSqlDatabase1_password": {
 			"value": ""
 		},
+		"AzureSqlDatabase2_password": {
+			"value": ""
+		},
+		"Snowflake1_password": {
+			"value": ""
+		},
+		"AzureBlobStorage1_sasUri": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://logisticdatalake.dfs.core.windows.net/"
 		},
@@ -22,6 +31,24 @@
 		},
 		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"value": "inimfon"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "logisticsdataenginnering.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "free-sql-db-8280734"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "inimfon"
+		},
+		"Snowflake1_properties_typeProperties_database": {
+			"value": "LOGISTICS"
+		},
+		"Snowflake1_properties_typeProperties_role": {
+			"value": "ACCOUNTADMIN"
+		},
+		"Snowflake1_properties_typeProperties_host": {
+			"value": "BMFRRZU-TY42923.snowflakecomputing.com"
 		},
 		"containerUri": {
 			"value": ""
