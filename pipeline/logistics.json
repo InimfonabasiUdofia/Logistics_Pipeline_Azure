@@ -58,7 +58,7 @@
 								"sink": {
 									"type": "DelimitedTextSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+										"type": "AzureBlobStorageWriteSettings"
 									},
 									"formatSettings": {
 										"type": "DelimitedTextWriteSettings",
@@ -84,15 +84,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DelimitedText1",
+									"referenceName": "DelimitedText3",
 									"type": "DatasetReference",
 									"parameters": {
-										"file": {
-											"value": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))",
-											"type": "Expression"
-										},
 										"folder": {
 											"value": "@item().file",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))",
 											"type": "Expression"
 										}
 									}
@@ -185,7 +185,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"dataset": {
-												"referenceName": "Binary1",
+												"referenceName": "Binary2",
 												"type": "DatasetReference",
 												"parameters": {
 													"folder": {
@@ -197,7 +197,7 @@
 											},
 											"enableLogging": false,
 											"storeSettings": {
-												"type": "AzureBlobFSReadSettings",
+												"type": "AzureBlobStorageReadSettings",
 												"recursive": true,
 												"enablePartitionDiscovery": false
 											}
@@ -331,14 +331,14 @@
 										"userProperties": [],
 										"typeProperties": {
 											"source": {
-												"type": "ParquetSource",
+												"type": "DelimitedTextSource",
 												"storeSettings": {
-													"type": "AzureBlobFSReadSettings",
+													"type": "AzureBlobStorageReadSettings",
 													"recursive": true,
 													"enablePartitionDiscovery": false
 												},
 												"formatSettings": {
-													"type": "ParquetReadSettings"
+													"type": "DelimitedTextReadSettings"
 												}
 											},
 											"sink": {
@@ -347,7 +347,13 @@
 													"type": "SnowflakeImportCopyCommand"
 												}
 											},
-											"enableStaging": false,
+											"enableStaging": true,
+											"stagingSettings": {
+												"linkedServiceName": {
+													"referenceName": "AzureBlobStorage1",
+													"type": "LinkedServiceReference"
+												}
+											},
 											"translator": {
 												"type": "TabularTranslator",
 												"typeConversion": true,
@@ -359,14 +365,17 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "Parquet1",
+												"referenceName": "DelimitedText4",
 												"type": "DatasetReference",
 												"parameters": {
 													"folder": {
 														"value": "@item().file",
 														"type": "Expression"
 													},
-													"filename": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))"
+													"file": {
+														"value": "@concat(item().file,'_', formatDateTime(variables('time'), 'yyyy-MM-ddTHH-mm-ss'))",
+														"type": "Expression"
+													}
 												}
 											}
 										],
@@ -375,7 +384,7 @@
 												"referenceName": "SnowflakeTable1",
 												"type": "DatasetReference",
 												"parameters": {
-													"connector": {
+													"table": {
 														"value": "@toUpper(item().file)",
 														"type": "Expression"
 													}
